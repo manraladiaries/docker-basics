@@ -1,0 +1,16 @@
+networks:
+  counter-net:
+
+services:
+  web:
+    build: .
+    command: python app.py 
+    ports:
+      - target: 8080
+        published: 5555
+    networks:
+      - counter-net
+  store:
+    image: "redis:alpine"
+    networks:
+      counter-net:
